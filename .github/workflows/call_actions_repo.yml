@@ -24,8 +24,8 @@ jobs:
       - name: Pass PR Details to Workflow 3 in Another Repo
         uses: peter-evans/workflow-dispatch@v1
         with:
-          repository: user/repo3  # Replace with the third repo
-          workflow: workflow3.yml
+          repository: OSrivalli/reactions  # Replace with the third repo
+          workflow: scan.yml
           ref: main  # or the default branch of the third repo
           inputs:
             pr_title: ${{ github.event.inputs.pr_title }}
