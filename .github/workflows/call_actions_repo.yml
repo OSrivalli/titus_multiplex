@@ -1,0 +1,35 @@
+name: Workflow 2 - Pass PR Details to Workflow 3
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_title:
+        description: 'PR Title'
+        required: true
+      pr_url:
+        description: 'PR URL'
+        required: true
+      pr_author:
+        description: 'PR Author'
+        required: true
+
+jobs:
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Pass PR Details to Workflow 3 in Another Repo
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          repository: user/repo3  # Replace with the third repo
+          workflow: workflow3.yml
+          ref: main  # or the default branch of the third repo
+          inputs:
+            pr_title: ${{ github.event.inputs.pr_title }}
+            pr_url: ${{ github.event.inputs.pr_url }}
+            pr_author: ${{ github.event.inputs.pr_author }}
+
+
