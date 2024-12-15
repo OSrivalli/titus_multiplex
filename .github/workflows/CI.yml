@@ -20,14 +20,3 @@ jobs:
           echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
           echo "pr_url=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
           echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
-
-      - name: Trigger Workflow 2 in Repo 2
-        uses: peter-evans/workflow-dispatch@v1
-        with:
-          repository: ${{ github.repository }}  
-          workflow: call_actions_repo.yml
-          ref: refs/heads/main  # or the default branch of the second repo
-          inputs:
-            pr_title: ${{ env.pr_title }}
-            pr_url: ${{ env.pr_url }}
-            pr_author: ${{ env.pr_author }}
