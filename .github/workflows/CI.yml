@@ -22,12 +22,8 @@ jobs:
           echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
       - name: Trigger Workflow 2 in Repo 2
-        uses: peter-evans/workflow-dispatch@v1
+        uses:uses: ./.github/workflows/call_actions_repo.yml
         with:
-          repository: ${{ github.repository }}  # Replace with your second repo
-          workflow: call_actions_repo.yml
-          #ref: main  # or the default branch of the second repo
-          inputs:
-            pr_title: ${{ env.pr_title }}
-            pr_url: ${{ env.pr_url }}
-            pr_author: ${{ env.pr_author }}
+          pr_title: ${{ env.pr_title }}
+          pr_url: ${{ env.pr_url }}
+          pr_author: ${{ env.pr_author }}
