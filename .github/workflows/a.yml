@@ -8,10 +8,10 @@ inputs:
 
 jobs:
   build:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Print Message
-      run: echo “${{ inputs.message }}”
+      - name: Print Message
+        run: echo “${{ inputs.message }}”
