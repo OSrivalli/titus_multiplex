@@ -16,7 +16,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-  job2:
-    needs:
-      - job1
-    uses: ./.github/workflows/call_actions_repo.yml
+      - name: call
+        uses: ./.github/workflows/call_actions_repo.yml
