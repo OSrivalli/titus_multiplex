@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Pass PR details to Workflow 2
-        uses: peter-evans/dispatch-action@v2
+        uses: peter-evans/workflow-dispatch@v1
         with:
           repository: ${{ github.repository }}
           workflow: call_actions_repo.yml
