@@ -1,0 +1,40 @@
+name: CI job
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sync_code:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Precommit check
+      uses: call_actions_repo.yml
+      with:
+        PR_NUMBER=${{ github.event.pull_request.number }}
+        REPO_OWNER=${{ github.repository_owner }}
+        REPO_NAME=${{ github.event.repository.name }}
+      secrets:
+        MY_SECRET: ${{ secrets.MY_SECRET }}
+ 
+  check_results_to_mark_PR:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: check-output
+      needs: sync_code
+      steps:
+      - name: Get the output from the actions workflow
+        run: echo "The output from the reusable workflow is: ${{ needs.sync_code.outputs.result }}"
+
+    - name: Add comment to PR
+      uses: peter-evans/create-or-update-comment@v2
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |           
+          :warning: There seems to be an issue with your pull request. Please check the details in https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}.
+        token: ${{ secrets.pat_token }}
