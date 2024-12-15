@@ -24,9 +24,9 @@ jobs:
       - name: Trigger Workflow 2 in Repo 2
         uses: peter-evans/workflow-dispatch@v1
         with:
-          repository: OSrivalli/titus_multiplex/.github/workflows/  # Replace with your second repo
+          repository: ${{ github.repository }}  
           workflow: call_actions_repo.yml
-          ref: main  # or the default branch of the second repo
+          ref: refs/heads/main  # or the default branch of the second repo
           inputs:
             pr_title: ${{ env.pr_title }}
             pr_url: ${{ env.pr_url }}
