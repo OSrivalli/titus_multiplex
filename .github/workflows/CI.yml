@@ -1,22 +1,21 @@
+---
 name: PR Trigger Workflow 1
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened]  # adjust based on your needs
+    types:
+      - opened
+      - synchronize
+      - reopened
     branches:
-      - main  # or your target branch
-  workflow_dispatch:
-
+      - main
+  workflow_dispatch: null
 jobs:
   job1:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-  job2:
-	needs:
-	  - job1
-	uses: ./.github/workflows/call_actions_repo.yml
-	
+  job2: null
+  needs:
+    - job1
+  uses: ./.github/workflows/call_actions_repo.yml
