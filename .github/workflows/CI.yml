@@ -26,7 +26,7 @@ jobs:
         with:
           repository: ${{ github.repository }}  # Replace with your second repo
           workflow: call_actions_repo.yml
-          ref: main  # or the default branch of the second repo
+          #ref: main  # or the default branch of the second repo
           inputs:
             pr_title: ${{ env.pr_title }}
             pr_url: ${{ env.pr_url }}
