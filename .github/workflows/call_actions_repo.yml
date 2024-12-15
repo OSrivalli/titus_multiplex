@@ -19,7 +19,7 @@ jobs:
         uses: OSrivalli/reactions@main
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          pr_details: ${{ env.pr_title }} 
+          pr_details: ${{ env.pr_details }} 
         
 
 
