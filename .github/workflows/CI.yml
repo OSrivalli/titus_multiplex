@@ -15,5 +15,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Pass PR details to Workflow 2
-        uses: ./call_actions_repo.yml
+  job2:
+	needs:
+	  - job1
+	uses: ./.github/workflows/call_actions_repo.yml
+	
