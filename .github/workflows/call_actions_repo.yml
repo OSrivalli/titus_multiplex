@@ -18,6 +18,8 @@ jobs:
           echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
   job4:
+    needs:
+      - job3
     steps:
       - name: Call Repo B
         uses: OSrivalli/reactions/PR_check@main
