@@ -1,21 +1,27 @@
 name: Workflow 2 - Pass PR Details to Workflow 3
 
 on:
-  repository_dispatch:
-    types: [pr-details]
+  workflow_call:
 
 jobs:
-  job2:
+  job3:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Pass PR details to Workflow 3
-        uses: peter-evans/dispatch-action@v2
-        with:
-          repository: OSrivalli/reactions
-          event-type: pr-details
-          client-payload: '{"pr_number": "${{ github.event.client_payload.pr_number }}", "pr_title": "${{ github.event.client_payload.pr_title }}", "pr_url": "${{ github.event.client_payload.pr_url }}"}'
-          
+      - name: Set PR details
+        id: pr_details
+        run: |
+          echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          echo "pr_url=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
+          echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
+  job4:
+    steps:
+      - name: Call Repo B
+        uses: OSrivalli/reactions/PR_check@main
+        with: 
+          pr_reviewers: '["sri"]'
+          token: ${{ secrets.PAT_TOKEN }}
+ 

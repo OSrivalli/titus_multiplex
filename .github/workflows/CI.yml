@@ -1,29 +1,22 @@
+---
 name: PR Trigger Workflow 1
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened]  # adjust based on your needs
+    types:
+      - opened
+      - synchronize
+      - reopened
     branches:
-      - main  # or your target branch
-
+      - main
+  workflow_dispatch: null
 jobs:
   job1:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set PR details
-        id: pr_details
-        run: |
-          echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
-          echo "pr_url=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
-          echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
-
-      - name: Pass PR details to Workflow 2
-        uses: peter-evans/dispatch-action@v2
-        with:
-          repository: ${{ github.repository }}
-          event-type: pr-details
-          client-payload: '{"pr_number": "${{ github.event.pull_request.number }}", "pr_title": "${{ github.event.pull_request.title }}", "pr_url": "${{ github.event.pull_request.html_url }}"}'
+  job2:
+    needs:
+      - job1
+    uses: ./.github/workflows/call_actions_repo.yml
