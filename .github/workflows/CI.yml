@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened]  # adjust based on your needs
     branches:
       - main  # or your target branch
+  workflow_dispatch:
 
 jobs:
   job1:
