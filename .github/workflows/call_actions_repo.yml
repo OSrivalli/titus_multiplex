@@ -1,17 +1,7 @@
 name: Workflow 2 - Pass PR Details to Workflow 3
 
 on:
-  workflow_dispatch:
-    inputs:
-      pr_title:
-        description: 'PR Title'
-        required: true
-      pr_url:
-        description: 'PR URL'
-        required: true
-      pr_author:
-        description: 'PR Author'
-        required: true
+  workflow_call:
 
 jobs:
   job2:
@@ -20,6 +10,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Set PR details
+        id: pr_details
+        run: |
+          echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          echo "pr_url=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
+          echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
       - name: Pass PR Details to Workflow 3 in Another Repo
         uses: peter-evans/workflow-dispatch@v1
@@ -31,5 +28,3 @@ jobs:
             pr_title: ${{ github.event.inputs.pr_title }}
             pr_url: ${{ github.event.inputs.pr_url }}
             pr_author: ${{ github.event.inputs.pr_author }}
-
-
