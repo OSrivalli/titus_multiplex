@@ -21,6 +21,10 @@ jobs:
         uses: OSrivalli/reactions/scan@main
         with:
           token: ${{ secrets.PAT_TOKEN }}
+        inputs:
+          pr_title: ${{ env.pr_title }}
+          pr_url: ${{ env.pr_url }}
+          pr_author: ${{ env.pr_author }}
 
 
  
