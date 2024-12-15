@@ -24,7 +24,3 @@ jobs:
           repository: OSrivalli/reactions  # Replace with the third repo
           workflow: scan.yml
           ref: main  # or the default branch of the third repo
-          inputs:
-            pr_title: ${{ github.event.inputs.pr_title }}
-            pr_url: ${{ github.event.inputs.pr_url }}
-            pr_author: ${{ github.event.inputs.pr_author }}
