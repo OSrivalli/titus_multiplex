@@ -24,6 +24,6 @@ jobs:
       - name: Pass PR details to Workflow 2
         uses: peter-evans/dispatch-action@v2
         with:
-          repository: ${{ github.repository }}/call_actions_repo.yml
+          repository: ${{ github.repository }}
           event-type: pr-details
           client-payload: '{"pr_number": "${{ github.event.pull_request.number }}", "pr_title": "${{ github.event.pull_request.title }}", "pr_url": "${{ github.event.pull_request.html_url }}"}'
