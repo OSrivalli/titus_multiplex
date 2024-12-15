@@ -13,14 +13,13 @@ jobs:
       - name: Set PR details
         id: pr_details
         run: |
-          echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
-          echo "pr_url=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
-          echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
+          echo "pr_details=${{ github.event.pull_request.* }}" >> $GITHUB_ENV
 
       - name: Run action
         uses: OSrivalli/reactions@main
         with:
           token: ${{ secrets.PAT_TOKEN }}
+          pr_details: ${{ env.pr_title }} 
         
 
 
