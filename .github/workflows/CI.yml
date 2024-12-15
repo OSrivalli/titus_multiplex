@@ -18,3 +18,4 @@ jobs:
 
       - name: call
         uses: ./.github/workflows/call_actions_repo.yml
+        secrets: ${{ secrets.PAT_TOKEN }}
