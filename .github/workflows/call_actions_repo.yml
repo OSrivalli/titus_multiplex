@@ -17,7 +17,10 @@ jobs:
           echo "pr_url=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
           echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
-
+  job4:
+    needs:
+      - job3
+    uses: OSrivalli/reactions/scan@main
 
 
  
