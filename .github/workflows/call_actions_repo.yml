@@ -18,7 +18,7 @@ jobs:
           echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
       - name: Run action
-        uses: OSrivalli/reactions/scan@main
+        uses: OSrivalli/reactions/action@main
         with:
           token: ${{ secrets.PAT_TOKEN }}
         
