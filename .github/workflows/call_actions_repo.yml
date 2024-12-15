@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  job2:
+  job3:
     runs-on: ubuntu-latest
 
     steps:
