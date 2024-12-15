@@ -22,7 +22,7 @@ jobs:
           echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
 
       - name: Trigger Workflow 2 in Repo 2
-        uses:uses: ./.github/workflows/call_actions_repo.yml
+        uses: ./.github/workflows/call_actions_repo.yml
         with:
           pr_title: ${{ env.pr_title }}
           pr_url: ${{ env.pr_url }}
